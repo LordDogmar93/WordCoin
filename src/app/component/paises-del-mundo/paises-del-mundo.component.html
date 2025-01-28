@@ -1,4 +1,22 @@
-<div>
-  <h2>Paises del mundo</h2>
-  <!-- Contenido específico -->
+<div class="container mx-auto mt-4">
+  <h2 class="text-center mb-4 text-2xl font-bold">Paises del mundo</h2>
+  
+  <div class=" flex justify-center items-center mb-4 space-x-4">
+    <input type="text" class="input input-bordered w-full max-w-xs" placeholder="Buscar país" [(ngModel)]="searchQuery" (input)="filterCountries()">
+    <select class="select select-bordered w-full max-w-xs" [(ngModel)]="selectedContinent" (change)="filterCountries()">
+      <option value="">Todos los continentes</option>
+      <option *ngFor="let continent of continents" [value]="continent">{{ continent }}</option>
+    </select>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div *ngFor="let country of filteredCountries" class="card shadow-lg">
+      <figure>
+        <img [src]="country.flags.png" alt="{{ country.name.common }} flag" class="w-full h-48 object-cover">
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">{{ country.name.common }}</h2>
+      </div>
+    </div>
+  </div>
 </div>
